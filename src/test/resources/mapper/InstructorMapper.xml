@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.util.Mapper.InstructorMapper">
+
+    <update id="updateByName">
+        update instructor
+        set id = #{id}
+        where name = #{name};
+    </update>
+
+    <update id="updateAmountById">
+        update instructor
+        set amount=amount - 1
+        where id = #{id};
+    </update>
+
+    <update id="updateStuNub">
+        update instructor
+        set lotusStu=lotusStu - #{lotusStu},
+            originStu=originStu - #{originStu},
+            amount=amount - 1
+        where (id = #{id});
+    </update>
+
+    <select id="getByType" resultType="instructor">
+        select *
+        from instructor
+        where (type = #{type})
+          and (amount>0);
+    </select>
+
+    <select id="getAll" resultType="instructor">
+        select *
+        from instructor;
+    </select>
+
+    <select id="getIdByName" resultType="string">
+        select id
+        from instructor
+        where (name = #{name})
+    </select>
+
+    <select id="getFiPingTch" resultType="instructor">
+        select *
+        from instructor
+        where (lotusStu > 0)
+          and (amount > 0)
+          and (type = 2)
+    </select>
+
+
+    <select id="getShiFanTch" resultType="instructor">
+        select *
+        from instructor
+        where (originStu > 0)
+          and (amount > 0)
+          and (type = 2)
+    </select>
+</mapper>

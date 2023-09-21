@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.util.Mapper.PeopleInformationMapper">
+
+    <select id="getAll" resultType="PeopleInformation">
+        select * from peopleinformation;
+    </select>
+
+    <select id="getNubByName" resultType="double">
+        select number from peopleinformation where name=#{name};
+    </select>
+
+    <update id="reduceNub" >
+        update peopleinformation  set number =number -#{nub} where name=#{name};
+    </update>
+
+</mapper>

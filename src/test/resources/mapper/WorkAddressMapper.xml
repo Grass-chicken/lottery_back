@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.util.Mapper.WorkAddressMapper">
+<!--    <update id="updateAmountById">-->
+<!--        update work_address set amount = amount - 1 where (id = #{id} And amount = #{amount});-->
+<!--    </update>-->
+    <update id="updateAmountById">
+        update work_address
+        set amount = amount - 1
+        where (id = #{id} And amount = #{amount}
+                          And (SELECT is_lottery FROM user WHERE id = #{userId} )  = 1
+                          And amount > 0);
+    </update>
+    <update id="updateDefaultNumberById">
+        update work_address set default_number = #{defaultNumber} where (id = #{id});
+    </update>
+    <select id="getAllWorkAddress" resultType="com.example.demo.entity.WorkAddress" resultMap="workAddress">
+        select * from work_address order by id;
+    </select>
+
+    <select id="getById" resultMap="workAddress">
+        select * from work_address where id = #{id};
+    </select>
+
+    <resultMap id="workAddress" type="com.example.demo.entity.WorkAddress">
+        <result column="id" property="id"/>
+        <result column="address" property="address"/>
+        <result column="amount" property="amount"/>
+        <result column="sex_limit" property="sexLimit"/>
+        <result column="default_number" property="defaultNumber"/>
+    </resultMap>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.util.Mapper.UserMapper">
+    <update id="updateAddressById">
+        update user set address = #{address},work_address_id = #{addressId} where (id = #{id});
+    </update>
+    <update id="updateIsLotteryById">
+        update user set is_lottery = #{isLottery} where (id = #{id});
+    </update>
+    <select id="findUserById" resultType="user" resultMap="user">
+        select * from user where(id = #{id});
+    </select>
+    <select id="getAllUser" resultType="com.example.demo.entity.User" resultMap="user">
+        select * from user;
+    </select>
+    <resultMap id="user" type="com.example.demo.entity.User">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="is_lottery" property="isLottery"/>
+        <result column="address" property="address"/>
+        <result column="class" property="belong"/>
+    </resultMap>
+</mapper>
